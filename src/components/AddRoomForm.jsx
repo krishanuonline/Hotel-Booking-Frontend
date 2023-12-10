@@ -1,6 +1,30 @@
-import React from "react";
+import { useRef, useState } from "react";
+import { BASE_URL } from "../utils/constant";
+import { postService } from "../services/service";
 
 const AddRoomForm = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const formRef = useRef(null);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const formData = new FormData(formRef.current);
+    try {
+      const res = await postService(`${BASE_URL}/rooms/add-room`, formData);
+      if (res.data.status !== true) throw new Error(res.data.message);
+      setIsSubmitted(true);
+      setIsLoading(false);
+      formRef.current.reset();
+    } catch (error) {
+      setError(error.message);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -14,7 +38,11 @@ const AddRoomForm = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Add Room
               </h1>
-              <form onSubmit={submitHandler} className="space-y-4 md:space-y-6">
+              <form
+                ref={formRef}
+                onSubmit={submitHandler}
+                className="space-y-4 md:space-y-6"
+              >
                 <div>
                   <label
                     htmlFor="room_no"
@@ -43,6 +71,22 @@ const AddRoomForm = () => {
                     type="text"
                     name="hotel_name"
                     id="hotel_name"
+                    placeholder=""
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required=""
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="location"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Location
+                  </label>
+                  <input
+                    type="text"
+                    name="location"
+                    id="location"
                     placeholder=""
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
@@ -135,10 +179,11 @@ const AddRoomForm = () => {
 
                 <div className="flex justify-center">
                   <button
+                    disabled={isLoading}
                     type="submit"
                     className="text-white bg-[#272CA5] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center w-80"
                   >
-                    Add Room
+                    {isLoading ? "Adding..." : "Add"}
                   </button>
                 </div>
               </form>

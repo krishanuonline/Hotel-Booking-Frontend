@@ -1,4 +1,25 @@
+import { useState } from "react";
+import { useAuth } from "../store/authContext";
+
 const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    mobile_no: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const { isLoading, error, signup } = useAuth();
+  const changeHandler = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    signup(formData);
+  };
+
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -12,8 +33,8 @@ const Register = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Register your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
-              <div>
+              <form onSubmit={submitHandler} className="space-y-4 md:space-y-6">
+                <div>
                   <label
                     htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -27,6 +48,8 @@ const Register = () => {
                     placeholder="eg: Krishanu Mandal"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
+                    value={formData.fullName}
+                    onChange={changeHandler}
                   />
                 </div>
 
@@ -39,12 +62,13 @@ const Register = () => {
                   </label>
                   <input
                     type="tel"
-                    pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                    name="phone-number"
+                    name="mobile_no"
                     id="phone-number"
                     placeholder="XXXXXXXXXX"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
+                    value={formData.phoneNumber}
+                    onChange={changeHandler}
                   />
                 </div>
                 <div>
@@ -61,6 +85,8 @@ const Register = () => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
                     required=""
+                    value={formData.email}
+                    onChange={changeHandler}
                   />
                 </div>
                 <div>
@@ -77,37 +103,40 @@ const Register = () => {
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
+                    value={formData.password}
+                    onChange={changeHandler}
                   />
                 </div>
                 <div>
                   <label
-                    htmlFor="confirm-password"
+                    htmlFor="confirmPassword"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Confirm Password
                   </label>
                   <input
                     type="password"
-                    name="password"
-                    id="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
+                    value={formData.confirmPassword}
+                    onChange={changeHandler}
                   />
                 </div>
-                
-
 
                 <div className="flex justify-center">
                   <button
-                    type="button"
+                    disabled={isLoading}
+                    type="submit"
                     className="text-white bg-[#272CA5] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center w-80"
                   >
-                    Register
+                    {isLoading ? "..." : "Register"}
                   </button>
                 </div>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Already have an account yet? { }
+                  Already have an account yet? {}
                   <a
                     href="/login"
                     className="text-[#272CA5] font-medium text-primary-600 hover:underline dark:text-primary-500"
@@ -121,7 +150,7 @@ const Register = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

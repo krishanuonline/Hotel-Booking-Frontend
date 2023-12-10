@@ -10,27 +10,20 @@ function Banner() {
         <p className="text-3xl mt-4">Book your next Destination</p>
       </div>
       <Serach />
-      
+
       <div className="mt-5 flex justify-center">
-        <div className="max-w-xs mr-5 bg-[url('/public/img/Banglore.png')] w-80">
-          <a href="#">Kolkata
-          </a>
+        <div className="max-w-xs mr-5 bg-[url('/img/Banglore.png')] bg-cover bg-no-repeat w-80">
+          <a href="#">Kolkata</a>
         </div>
-        <div className="max-w-xs mr-5 bg-[url('/public/img/Banglore.png')] w-80">
-          <a href="#">
-          </a>
+        <div className="max-w-xs mr-5 bg-[url('/img/Banglore.png')] bg-cover bg-no-repeat w-80">
+          <a href="#"></a>
         </div>
         <div className="max-w-xs ">
           <a href="#">
-            <img
-              className="rounded-t-md"
-              src="/public/img/Banglore.png"
-              alt="image"
-            />
+            <img className="rounded-t-md" src="/img/Banglore.png" alt="image" />
           </a>
         </div>
       </div>
-
     </section>
   );
 }

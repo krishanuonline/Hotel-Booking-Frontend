@@ -1,9 +1,11 @@
+import HotelListContainer from "../components/HotelListContainer";
+
 const HotelList = () => {
   return (
-    <div>
-      Hotel-List
+    <div className="mt-10">
+      <HotelListContainer />
     </div>
-  )
-}
+  );
+};
 
-export default HotelList
+export default HotelList;

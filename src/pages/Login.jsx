@@ -1,4 +1,21 @@
+import { useState } from "react";
+import { useAuth } from "../store/authContext";
+
 export default function Login() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const { isLoading, error, login } = useAuth();
+  const changeHandler = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const submithandler = (e) => {
+    e.preventDefault();
+    login(formData);
+  };
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -12,7 +29,7 @@ export default function Login() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Login to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form onSubmit={submithandler} className="space-y-4 md:space-y-6">
                 <div>
                   <label
                     htmlFor="email"
@@ -27,6 +44,8 @@ export default function Login() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
                     required=""
+                    value={formData.email}
+                    onChange={changeHandler}
                   />
                 </div>
                 <div>
@@ -43,6 +62,8 @@ export default function Login() {
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
+                    value={formData.password}
+                    onChange={changeHandler}
                   />
                 </div>
                 <div className="flex items-center justify-between">
@@ -55,14 +76,15 @@ export default function Login() {
                 </div>
                 <div className="flex justify-center">
                   <button
-                    type="button"
+                    disabled={isLoading}
+                    type="submit"
                     className="text-white bg-[#272CA5] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex justify-center w-80"
                   >
-                    Login
+                    {isLoading ? "..." : "Login"}
                   </button>
                 </div>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don’t have an account yet? { }
+                  Don’t have an account yet? {}
                   <a
                     href="/register"
                     className="text-[#272CA5] font-medium text-primary-600 hover:underline dark:text-primary-500"

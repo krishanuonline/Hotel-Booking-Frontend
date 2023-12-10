@@ -5,10 +5,12 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import RegisterHotel from "./pages/RegisterHotel";
 import HotelList from "./pages/HotelList";
+import { AuthProvider } from "./store/authContext";
 
 function App() {
   return (
     <BrowserRouter>
+      <AuthProvider>
       <Routes>
         <Route element={<AppLayout />}>
           <Route index element={<Home />} />
@@ -19,6 +21,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

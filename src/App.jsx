@@ -6,21 +6,23 @@ import Login from "./pages/Login";
 import RegisterHotel from "./pages/RegisterHotel";
 import HotelList from "./pages/HotelList";
 import { AuthProvider } from "./store/authContext";
+import AddRoom from "./pages/AddRoom";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-      <Routes>
-        <Route element={<AppLayout />}>
-          <Route index element={<Home />} />
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<Home />} />
 
-          <Route path="/register-hotel" element={<RegisterHotel />} />
-          <Route path="/hotel-list" element={<HotelList />} />
-        </Route>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+            <Route path="/register-hotel" element={<RegisterHotel />} />
+            <Route path="/hotel-list/:location" element={<HotelList />} />
+            <Route path="/add-room" element={<AddRoom />} />
+          </Route>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
       </AuthProvider>
     </BrowserRouter>
   );

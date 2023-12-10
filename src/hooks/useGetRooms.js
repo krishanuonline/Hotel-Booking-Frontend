@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constant";
 
-export default function useAllRooms() {
+export default function useGetRooms() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [rooms, setRooms] = useState();

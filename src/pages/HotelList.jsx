@@ -9,7 +9,7 @@ const HotelList = () => {
   const [error, setError] = useState();
   const [rooms, setRooms] = useState();
 
-  const { location } = useParams();
+  const { location, checkinDate, checkoutDate } = useParams();
   let url = `${BASE_URL}/rooms/all-rooms/?`
 
   if (location) {
@@ -21,7 +21,7 @@ const HotelList = () => {
   }, []);
 
   const getAllRooms = async () => {
-    console.log(url)
+    // console.log(url)
     try {
       setIsLoading(true);
       const res = await axios.get(url);
@@ -42,7 +42,7 @@ const HotelList = () => {
       <div>filter</div>
       <div className="flex flex-col gap-4">
         {rooms.map((room) => (
-          <HotelListCard key={room.id} room={room} />
+          <HotelListCard key={room.id} room={room} checkinDate={checkinDate} checkoutDate={checkoutDate} />
         ))}
       </div>
     </div>

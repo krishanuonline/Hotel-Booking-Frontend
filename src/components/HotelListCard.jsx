@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import BookModal from "./BookModal";
 
-function HotelListCard({ room }) {
+function HotelListCard({ room, checkinDate, checkoutDate }) {
   const {
+    id,
     hotel_name,
     category,
     description,
@@ -11,6 +14,13 @@ function HotelListCard({ room }) {
     price,
     room_type,
   } = room;
+
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const handelModal = () => {
+    setIsModalOpen(false)
+  }
+
   return (
     <div className="flex gap-2 border-2 items-center w-[60rem] relative">
       <div className="absolute top-0 left-0 bg-[#FF8A00] px-3 text-white">
@@ -38,11 +48,13 @@ function HotelListCard({ room }) {
       </div>
       <div className="flex flex-col gap-4">
         <div className="font-bold text-blue-500 text-3xl">₹{price}</div>
-        <button className="bg-[#31A12E] text-white px-4 py-2 text-2xl font-bold">
+        <button className="bg-[#31A12E] text-white px-4 py-2 text-2xl font-bold"
+          onClick={() => setIsModalOpen(true)}>
           Book Now
         </button>
       </div>
-    </div>
+      {isModalOpen && <BookModal checkinDate={checkinDate} checkoutDate={checkoutDate} price={price} roomId={id} onHandleModal={handelModal} />}
+    </div >
   );
 }
 

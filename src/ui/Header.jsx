@@ -22,9 +22,10 @@ export default function Header() {
         )}
         {isLoading && "loading..."}
         {!isLoading && user ? (
-          <div>
+          <div className="flex gap-3">
+            <p className="text-white text-xl uppercase">{user.name}</p>
             <img
-              src="/img/user.png"
+              src="/img/react.svg"
               alt=""
               className="h-6 w-6 cursor-pointer"
               onClick={() => setIsModalOpen(!isModalOpen)}

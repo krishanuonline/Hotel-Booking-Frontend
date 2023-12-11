@@ -7,6 +7,7 @@ import RegisterHotel from "./pages/RegisterHotel";
 import HotelList from "./pages/HotelList";
 import { AuthProvider } from "./store/authContext";
 import AddRoom from "./pages/AddRoom";
+import BookingForm from "./components/BookingForm";
 
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
             <Route index element={<Home />} />
 
             <Route path="/register-hotel" element={<RegisterHotel />} />
-            <Route path="/hotel-list/:location" element={<HotelList />} />
+            <Route path="/hotel-list/:location/:checkinDate/:checkoutDate" element={<HotelList />} />
             <Route path="/add-room" element={<AddRoom />} />
+
           </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

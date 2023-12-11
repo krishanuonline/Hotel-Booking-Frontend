@@ -1,7 +1,9 @@
+import Register from "./Register"
+
 const RegisterHotel = () => {
   return (
     <div>
-      Register - Hotel
+      <Register role='owner' title='Register as a hotel owner' />
     </div>
   )
 }

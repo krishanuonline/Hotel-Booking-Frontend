@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { BASE_URL } from "../utils/constant";
 import { postService } from "../services/service";
 
-const BookingForm = ({ roomId, checkinDate, checkoutDate, price, onHandleModal }) => {
+const BookingForm = ({ roomId, checkinDate, checkoutDate, price, onHandleModal, onHandleDisable }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -34,6 +34,7 @@ const BookingForm = ({ roomId, checkinDate, checkoutDate, price, onHandleModal }
       setIsSubmitted(true);
       setIsLoading(false);
       onHandleModal()
+      onHandleDisable()
       setFormData({})
     } catch (error) {
       setError(error.message);

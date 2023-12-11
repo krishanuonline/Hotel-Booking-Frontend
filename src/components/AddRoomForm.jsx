@@ -1,11 +1,13 @@
 import { useRef, useState } from "react";
 import { BASE_URL } from "../utils/constant";
 import { postService } from "../services/service";
+import { useNavigate } from "react-router-dom";
 
 const AddRoomForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const formRef = useRef(null);
 
@@ -19,6 +21,7 @@ const AddRoomForm = () => {
       setIsSubmitted(true);
       setIsLoading(false);
       formRef.current.reset();
+      navigate("/");
     } catch (error) {
       setError(error.message);
       setIsLoading(false);

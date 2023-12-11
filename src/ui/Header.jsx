@@ -7,7 +7,7 @@ export default function Header() {
   const { user, isLoading, logout } = useAuth();
 
   return (
-    <header className="flex justify-between sticky top-0 w-full py-5 px-8 bg-[#272CA5] items-center">
+    <header className="flex justify-between top-0 w-full py-5 px-8 h-16 bg-[#272CA5] items-center">
       <Link to="/" className="text-white font-bold">
         hotel-booking.in
       </Link>
@@ -31,11 +31,14 @@ export default function Header() {
               onClick={() => setIsModalOpen(!isModalOpen)}
             />
             {isModalOpen && (
-              <div className="fixed bg-white right-5 mt-2 flex flex-col p-2">
+              <div className="right-5 mt-12 flex flex-col p-2 gap-2 bg-[#ffce96]" onClick={() => setIsModalOpen(false)}>
                 {!isLoading && user.role === "user" && (
-                  <Link to="/mybookings">My bookings</Link>
+                  <Link to="/mybookings" className="uppercase font-semibold p-2 bg-[#FF8A00] text-white">My bookings</Link>
                 )}
-                <button onClick={() => logout()}>Logout</button>
+                {!isLoading && user.role === "owner" && (
+                  <Link to="/add-room" className="uppercase font-semibold p-2 bg-[#FF8A00] text-white">Add Room</Link>
+                )}
+                <button onClick={() => logout()} className="uppercase font-semibold p-2 bg-[#FF8A00] text-white">Logout</button>
               </div>
             )}
           </div>

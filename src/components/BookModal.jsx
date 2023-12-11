@@ -1,6 +1,6 @@
 import BookingForm from "./BookingForm";
 
-export default function BookModal({ checkinDate, checkoutDate, price, roomId, onHandleModal }) {
+export default function BookModal({ checkinDate, checkoutDate, price, roomId, onHandleModal, onHandleDisable }) {
 
   return (
     <>
@@ -12,7 +12,7 @@ export default function BookModal({ checkinDate, checkoutDate, price, roomId, on
               <h3 className="text-4xl cursor-pointer" onClick={onHandleModal}>&times;</h3>
             </div>
 
-            <BookingForm checkinDate={checkinDate} checkoutDate={checkoutDate} price={price} roomId={roomId} onHandleModal={onHandleModal} />
+            <BookingForm checkinDate={checkinDate} checkoutDate={checkoutDate} price={price} roomId={roomId} onHandleModal={onHandleModal} onHandleDisable={onHandleDisable} />
           </div>
         </div>
       </div>

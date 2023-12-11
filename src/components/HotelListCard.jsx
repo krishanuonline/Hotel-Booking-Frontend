@@ -13,10 +13,16 @@ function HotelListCard({ room, checkinDate, checkoutDate }) {
     location,
     price,
     room_type,
+    booked
   } = room;
 
-  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [disabled, setDisabled] = useState(booked)
+
+  const handleDisable = () => {
+    setDisabled(true)
+  }
+
   const handelModal = () => {
     setIsModalOpen(false)
   }
@@ -48,12 +54,12 @@ function HotelListCard({ room, checkinDate, checkoutDate }) {
       </div>
       <div className="flex flex-col gap-4">
         <div className="font-bold text-blue-500 text-3xl">₹{price}</div>
-        <button className="bg-[#31A12E] text-white px-4 py-2 text-2xl font-bold"
-          onClick={() => setIsModalOpen(true)}>
-          Book Now
+        <button className={` text-white px-4 py-2 text-2xl font-bold ${disabled ? 'bg-[#32a12e63]' : 'bg-[#31A12E]'}`}
+          onClick={() => setIsModalOpen(true)} disabled={disabled}>
+          {disabled ? 'Booked' : 'Book Now'}
         </button>
       </div>
-      {isModalOpen && <BookModal checkinDate={checkinDate} checkoutDate={checkoutDate} price={price} roomId={id} onHandleModal={handelModal} />}
+      {isModalOpen && <BookModal checkinDate={checkinDate} checkoutDate={checkoutDate} price={price} roomId={id} onHandleModal={handelModal} onHandleDisable={handleDisable} />}
     </div >
   );
 }

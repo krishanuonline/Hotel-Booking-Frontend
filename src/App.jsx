@@ -22,7 +22,7 @@ function App() {
             <Route path="/add-room" element={<AddRoom />} />
 
           </Route>
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<Register role='user' title='Register your account' />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </AuthProvider>

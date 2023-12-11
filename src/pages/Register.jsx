@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useAuth } from "../store/authContext";
 
-const Register = () => {
+const Register = ({ title, role }) => {
   const [formData, setFormData] = useState({
     name: "",
     mobile_no: "",
     email: "",
     password: "",
     confirmPassword: "",
+    role
   });
   const { isLoading, error, signup } = useAuth();
   const changeHandler = (e) => {
@@ -31,7 +32,7 @@ const Register = () => {
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Register your account
+                {title}
               </h1>
               <form onSubmit={submitHandler} className="space-y-4 md:space-y-6">
                 <div>
@@ -136,7 +137,7 @@ const Register = () => {
                   </button>
                 </div>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Already have an account yet? {}
+                  Already have an account yet? { }
                   <a
                     href="/login"
                     className="text-[#272CA5] font-medium text-primary-600 hover:underline dark:text-primary-500"

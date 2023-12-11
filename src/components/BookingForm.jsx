@@ -1,13 +1,14 @@
 import { useRef, useState } from "react";
 import { BASE_URL } from "../utils/constant";
 import { postService } from "../services/service";
+import { useAuth } from "../store/authContext";
 
 const BookingForm = ({ roomId, checkinDate, checkoutDate, price, onHandleModal, onHandleDisable }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-
+  const {user} = useAuth()
   const [formData, setFormData] = useState({
     full_name: "",
     mobile_no: "",
@@ -22,14 +23,14 @@ const BookingForm = ({ roomId, checkinDate, checkoutDate, price, onHandleModal, 
   };
 
 
-  // console.log(roomId, checkinDate, checkoutDate, price)
+  console.log(roomId, checkinDate, checkoutDate, price)
 
   const submitHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const res = await postService(`${BASE_URL}/booking/${roomId}/checkout`, formData);
+      const res = await postService(`${BASE_URL}/booking/${roomId}/checkout/${user.id}`, formData);
       if (res.data.status !== true) throw new Error(res.data.message);
       setIsSubmitted(true);
       setIsLoading(false);

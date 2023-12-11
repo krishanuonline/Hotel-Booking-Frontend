@@ -10,15 +10,21 @@ const HotelList = () => {
   const [rooms, setRooms] = useState();
 
   const { location } = useParams();
+  let url = `${BASE_URL}/rooms/all-rooms/?`
+
+  if (location) {
+    url += `location=${location}`
+  }
 
   useEffect(() => {
     getAllRooms();
   }, []);
 
   const getAllRooms = async () => {
+    console.log(url)
     try {
       setIsLoading(true);
-      const res = await axios.get(`${BASE_URL}/rooms/all-rooms/`);
+      const res = await axios.get(url);
       setRooms(res.data.rooms);
       setIsLoading(false);
     } catch (error) {

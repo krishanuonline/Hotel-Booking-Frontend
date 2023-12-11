@@ -24,12 +24,15 @@ function HotelListCard({ room }) {
       <div className="w-1/2 flex flex-col gap-2">
         <h1 className="text-3xl font-bold">{hotel_name}</h1>
         <p className="text-lg">{description}</p>
-        <div className="flex gap-2">
-          <div className="p-2 w-20 text-center bg-[#D49B58] text-white">
+        <div className="flex gap-2 items-center">
+          <div className="p-2 text-center bg-[#D49B58] text-white uppercase">
             {room_type}
           </div>
-          <div className="p-2 w-20 text-center bg-[#D49B58] text-white">
+          <div className="p-2 text-center bg-[#D49B58] text-white uppercase">
             {bed_type}
+          </div>
+          <div className="p-2 text-center bg-[#D49B58] text-white uppercase">
+            {location}
           </div>
         </div>
       </div>

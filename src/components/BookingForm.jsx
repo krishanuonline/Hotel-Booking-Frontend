@@ -2,13 +2,15 @@ import { useRef, useState } from "react";
 import { BASE_URL } from "../utils/constant";
 import { postService } from "../services/service";
 import { useAuth } from "../store/authContext";
+import { useNavigate } from "react-router-dom";
 
 const BookingForm = ({ roomId, checkinDate, checkoutDate, price, onHandleModal, onHandleDisable }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const {user} = useAuth()
+  const { user } = useAuth()
   const [formData, setFormData] = useState({
     full_name: "",
     mobile_no: "",
@@ -37,6 +39,7 @@ const BookingForm = ({ roomId, checkinDate, checkoutDate, price, onHandleModal, 
       onHandleModal()
       onHandleDisable()
       setFormData({})
+      navigate('/my-bookings')
     } catch (error) {
       setError(error.message);
       setIsLoading(false);

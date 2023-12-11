@@ -5,11 +5,14 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import RegisterHotel from "./pages/RegisterHotel";
 import HotelList from "./pages/HotelList";
-import { AuthProvider } from "./store/authContext";
+import { AuthProvider, useAuth } from "./store/authContext";
 import AddRoom from "./pages/AddRoom";
 import BookingForm from "./components/BookingForm";
+import MyBooking from "./pages/MyBooking";
 
 function App() {
+
+
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -20,6 +23,7 @@ function App() {
             <Route path="/register-hotel" element={<RegisterHotel />} />
             <Route path="/hotel-list/:location/:checkinDate/:checkoutDate" element={<HotelList />} />
             <Route path="/add-room" element={<AddRoom />} />
+            <Route path="/my-bookings" element={<MyBooking />} />
 
           </Route>
           <Route path="/register" element={<Register role='user' title='Register your account' />} />

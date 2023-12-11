@@ -33,7 +33,7 @@ export default function Header() {
             {isModalOpen && (
               <div className="right-5 mt-12 flex flex-col p-2 gap-2 bg-[#ffce96]" onClick={() => setIsModalOpen(false)}>
                 {!isLoading && user.role === "user" && (
-                  <Link to="/mybookings" className="uppercase font-semibold p-2 bg-[#FF8A00] text-white">My bookings</Link>
+                  <Link to="/my-bookings" className="uppercase font-semibold p-2 bg-[#FF8A00] text-white">My bookings</Link>
                 )}
                 {!isLoading && user.role === "owner" && (
                   <Link to="/add-room" className="uppercase font-semibold p-2 bg-[#FF8A00] text-white">Add Room</Link>

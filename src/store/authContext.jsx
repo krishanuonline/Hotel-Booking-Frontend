@@ -65,6 +65,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     // Remove user data from localStorage
     localStorage.removeItem("user");
+    navigate("/");
   };
 
   return (

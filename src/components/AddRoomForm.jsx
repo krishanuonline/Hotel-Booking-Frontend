@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { BASE_URL } from "../utils/constant";
 import { postService } from "../services/service";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/authContext";
 
 const AddRoomForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -10,13 +11,14 @@ const AddRoomForm = () => {
   const navigate = useNavigate();
 
   const formRef = useRef(null);
+  const { user } = useAuth();
 
   const submitHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const formData = new FormData(formRef.current);
     try {
-      const res = await postService(`${BASE_URL}/rooms/add-room`, formData);
+      const res = await postService(`${BASE_URL}/rooms/add-room/${user.id}`, formData);
       if (res.data.status !== true) throw new Error(res.data.message);
       setIsSubmitted(true);
       setIsLoading(false);
